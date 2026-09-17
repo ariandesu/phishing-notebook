@@ -1,0 +1,162 @@
+{
+  "issues": [
+    {
+      "issue_id": "A",
+      "issue_name": "threshold/model mismatch",
+      "requirement": "threshold_oof_audit.json per-model OOF completeness",
+      "evidence": "outputs/audit/threshold_oof_audit.json",
+      "evidence_file": "outputs/audit/threshold_oof_audit.json",
+      "verification_method": "threshold_oof_audit.json per-model OOF completeness",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "B",
+      "issue_name": "defanged structural shortcut",
+      "requirement": "shortcut_control_audit.json identifies has_defanged association",
+      "evidence": "outputs/audit/shortcut_control_audit.json",
+      "evidence_file": "outputs/audit/shortcut_control_audit.json",
+      "verification_method": "shortcut_control_audit.json identifies has_defanged association",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "C",
+      "issue_name": "external dataset integrity & isolation",
+      "requirement": "external_dataset_integrity_audit.json & external_threshold_audit.json",
+      "evidence": "outputs/audit/external_dataset_integrity_audit.json",
+      "evidence_file": "outputs/audit/external_dataset_integrity_audit.json",
+      "verification_method": "external_dataset_integrity_audit.json & external_threshold_audit.json",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "D",
+      "issue_name": "operating-point mismatch",
+      "requirement": "operating_point_audit.json array/hash comparison (figure and canonical confusion matrices)",
+      "evidence": "outputs/audit/operating_point_audit.json",
+      "evidence_file": "outputs/audit/operating_point_audit.json",
+      "verification_method": "operating_point_audit.json array/hash comparison (figure and canonical confusion matrices)",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "E",
+      "issue_name": "bootstrap wrong threshold",
+      "requirement": "bootstrap_audit.json threshold_match and B",
+      "evidence": "outputs/audit/bootstrap_audit.json",
+      "evidence_file": "outputs/audit/bootstrap_audit.json",
+      "verification_method": "bootstrap_audit.json threshold_match and B",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "F",
+      "issue_name": "FusionNN OOF epoch policy",
+      "requirement": "OOF_FUSIONNN_EPOCHS == FINAL_EPOCHS",
+      "evidence": "outputs/audit/final_model_selection_audit.json",
+      "evidence_file": "outputs/audit/final_model_selection_audit.json",
+      "verification_method": "OOF_FUSIONNN_EPOCHS == FINAL_EPOCHS",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "G",
+      "issue_name": "hardcoded paper fallbacks",
+      "requirement": "paper_result_consistency_audit.json source+value recomputation",
+      "evidence": "outputs/audit/paper_result_consistency_audit.json",
+      "evidence_file": "outputs/audit/paper_result_consistency_audit.json",
+      "verification_method": "paper_result_consistency_audit.json source+value recomputation",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "H",
+      "issue_name": "hardcoded master-results n",
+      "requirement": "master_results_audit.json dynamic sample sizes derived from len()",
+      "evidence": "outputs/audit/master_results_audit.json",
+      "evidence_file": "outputs/audit/master_results_audit.json",
+      "verification_method": "master_results_audit.json dynamic sample sizes derived from len()",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "I",
+      "issue_name": "distilbert shortcut audit",
+      "requirement": "distilbert_shortcut_audit.json audit of token/marker visibility",
+      "evidence": "outputs/audit/distilbert_shortcut_audit.json",
+      "evidence_file": "outputs/audit/distilbert_shortcut_audit.json",
+      "verification_method": "distilbert_shortcut_audit.json audit of token/marker visibility",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "J",
+      "issue_name": "standardized effect size",
+      "requirement": "effect_size_audit.json cureton_rank_biserial implementation",
+      "evidence": "outputs/audit/effect_size_audit.json",
+      "evidence_file": "outputs/audit/effect_size_audit.json",
+      "verification_method": "effect_size_audit.json cureton_rank_biserial implementation",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "K",
+      "issue_name": "explicit bootstrap protocol",
+      "requirement": "bootstrap_audit.json protocol parameters",
+      "evidence": "outputs/audit/bootstrap_audit.json",
+      "evidence_file": "outputs/audit/bootstrap_audit.json",
+      "verification_method": "bootstrap_audit.json protocol parameters",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "L",
+      "issue_name": "scientific quality gates",
+      "requirement": "all mandatory gate inputs present + negative test suite proves no false-PASS path",
+      "evidence": "outputs/audit/negative_test_results.json",
+      "evidence_file": "outputs/audit/negative_test_results.json",
+      "verification_method": "all mandatory gate inputs present + negative test suite proves no false-PASS path",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "M",
+      "issue_name": "dynamic paper results generation",
+      "requirement": "paper_result_consistency_audit.json derived from result tables",
+      "evidence": "outputs/audit/paper_result_consistency_audit.json",
+      "evidence_file": "outputs/audit/paper_result_consistency_audit.json",
+      "verification_method": "paper_result_consistency_audit.json derived from result tables",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    },
+    {
+      "issue_id": "N",
+      "issue_name": "publication claims consistency",
+      "requirement": "conservative interpretation enforced in paper consistency audit",
+      "evidence": "outputs/audit/paper_result_consistency_audit.json",
+      "evidence_file": "outputs/audit/paper_result_consistency_audit.json",
+      "verification_method": "conservative interpretation enforced in paper consistency audit",
+      "verification_result": "PASS",
+      "status": "PASS",
+      "failure_reason": null
+    }
+  ],
+  "n_issues": 14,
+  "failing_issues": [],
+  "all_issues_pass": true,
+  "status": "PASS"
+}

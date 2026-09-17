@@ -1,0 +1,13 @@
+{
+  "max_length": 128,
+  "device": "cuda:0",
+  "first_N_token_visibility": true,
+  "template_position_consistency": true,
+  "artifact_sensitivity": true,
+  "clean_test_perfect_score_warning": true,
+  "clean_test_f1": 1.0,
+  "artifact_stripped_f1": 0.7931034482758621,
+  "adversarial_f1_max_rate": 0.8829787234042553,
+  "status": "PASS",
+  "failure_reason": null
+}

@@ -1,0 +1,8 @@
+{
+  "rows": 1000,
+  "unique_groups": 996,
+  "conflict_groups": 1,
+  "conflict_rate": 0.001,
+  "mean_group_size": 1.0,
+  "max_group_size": 2
+}

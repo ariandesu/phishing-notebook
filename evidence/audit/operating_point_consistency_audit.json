@@ -1,0 +1,23 @@
+{
+  "canonical_threshold": 0.66,
+  "figure_threshold": 0.66,
+  "error_analysis_threshold": 0.66,
+  "prediction_arrays_identical": true,
+  "confusion_matrices_identical": true,
+  "canonical_prediction_hash": "34f85d51b7dbfb11dfcebebfa3c0e47a129e17e9d29c75252643315a1b3c43ad",
+  "error_analysis_prediction_hash": "34f85d51b7dbfb11dfcebebfa3c0e47a129e17e9d29c75252643315a1b3c43ad",
+  "n_test": 199,
+  "positive_predictions": 104,
+  "negative_predictions": 95,
+  "tn": 94,
+  "fp": 0,
+  "fn": 1,
+  "tp": 104,
+  "f1": 0.9952153110047847,
+  "mcc": 0.989974810443823,
+  "status": "PASS",
+  "failure_reason": null,
+  "figure_prediction_hash": "34f85d51b7dbfb11dfcebebfa3c0e47a129e17e9d29c75252643315a1b3c43ad",
+  "figure_cm_identical": true,
+  "figure_prediction_arrays_identical": true
+}

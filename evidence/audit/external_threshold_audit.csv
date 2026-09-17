@@ -1,0 +1,8 @@
+model,threshold,threshold_source,external_labels_used_for_threshold
+FusionNN,0.66,development_oof,False
+LR-TFIDF,0.47,development_oof,False
+LR-SBERT,0.64,development_oof,False
+LR-Structural,0.51,development_oof,False
+LR-SBERT+Structural,0.33,development_oof,False
+LR-All,0.33,development_oof,False
+DistilBERT,0.1,development_oof,False

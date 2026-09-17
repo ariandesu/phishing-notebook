@@ -1,0 +1,56 @@
+[
+  {
+    "feature": "has_defanged",
+    "ham_mean": 0.006,
+    "spam_mean": 1.0,
+    "univariate_auc": 0.997
+  },
+  {
+    "feature": "has_url",
+    "ham_mean": 0.846,
+    "spam_mean": 0.864,
+    "univariate_auc": 0.509
+  },
+  {
+    "feature": "has_html",
+    "ham_mean": 0.316,
+    "spam_mean": 0.334,
+    "univariate_auc": 0.509
+  },
+  {
+    "feature": "http_count",
+    "ham_mean": 128.614,
+    "spam_mean": 137.258,
+    "univariate_auc": 0.4924
+  },
+  {
+    "feature": "https_count",
+    "ham_mean": 122.932,
+    "spam_mean": 130.894,
+    "univariate_auc": 0.492
+  },
+  {
+    "feature": "click_count",
+    "ham_mean": 0.316,
+    "spam_mean": 0.31,
+    "univariate_auc": 0.5092
+  },
+  {
+    "feature": "digit_ratio",
+    "ham_mean": 0.0201,
+    "spam_mean": 0.0227,
+    "univariate_auc": 0.5723
+  },
+  {
+    "feature": "entropy",
+    "ham_mean": 4.9372,
+    "spam_mean": 4.9833,
+    "univariate_auc": 0.5574
+  },
+  {
+    "feature": "char_count",
+    "ham_mean": 23279.238,
+    "spam_mean": 24458.802,
+    "univariate_auc": 0.5163
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "validation_derived_fixed_epoch": 15,
+  "final_training_epochs": 15,
+  "FINAL_EPOCHS": 15,
+  "OOF_FUSIONNN_EPOCHS": 15,
+  "same_training_epoch_policy": true,
+  "dev_used_for_fitting": true,
+  "dev_used_for_epoch_selection": false,
+  "untouched_test_used_for_selection": false,
+  "status": "PASS"
+}

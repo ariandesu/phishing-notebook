@@ -1,0 +1,7 @@
+{
+  "notebook_file": "trac 9.1.ipynb",
+  "expected_hash": "42d6bdb0afa29a858c7baa3d57b7316d15b35c27b0534f5a8cc4868a12b99573",
+  "actual_hash": "42d6bdb0afa29a858c7baa3d57b7316d15b35c27b0534f5a8cc4868a12b99573",
+  "manifest_audit_passed": true,
+  "status": "PASS"
+}

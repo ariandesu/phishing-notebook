@@ -1,0 +1,7 @@
+model,artifact_stripped_test,clean_test,delta_f1
+FusionNN,0.3594,0.9952,-0.6358
+LR-All,0.0909,0.9952,-0.9043
+LR-SBERT,0.7458,0.9223,-0.1766
+LR-SBERT+Structural,0.0909,0.9952,-0.9043
+LR-Structural,0.0,1.0,-1.0
+LR-TFIDF,0.655,0.8442,-0.1893

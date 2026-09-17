@@ -1,0 +1,12 @@
+{
+  "total_rows": 223,
+  "expected_test_n": 199,
+  "expected_external_n": 10191,
+  "test_n_matches": true,
+  "external_n_matches": true,
+  "external_n_source": "len(ext_raw) at runtime",
+  "test_n_source": "len(test_df) at runtime",
+  "no_hardcoded_n_in_master": true,
+  "hardcoded_literals_absent": true,
+  "status": "PASS"
+}

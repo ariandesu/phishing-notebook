@@ -1,0 +1,31 @@
+{
+  "dataset_path": "C:\\Users\\hermes\\workspace\\trac9_desktop\\ham_spam_dataset.csv",
+  "resolution_policy": "explicit declared path order (no glob indexing)",
+  "declared_paths": [
+    "C:\\Users\\hermes\\workspace\\trac9_desktop\\ham_spam_dataset.csv",
+    "/home/mahir-linux/.hermes/webui/attachments/1092ecf373b9/ham_spam_dataset.csv",
+    "/kaggle/input/ham-spam-dataset/ham_spam_dataset.csv"
+  ],
+  "other_copies_present_not_used": [
+    "C:/gpu-worker-triggers\\inbox\\ham_spam_dataset.csv",
+    "C:/gpu-worker-triggers\\staging\\ham_spam_dataset.csv"
+  ],
+  "external_path": "C:\\Users\\hermes\\workspace\\trac9_desktop\\Dataset_10191.csv",
+  "external_declared_paths": [
+    "C:\\Users\\hermes\\workspace\\trac9_desktop\\Dataset_10191.csv",
+    "/home/mahir-linux/workspace/trac9_evidence/Dataset_10191.csv",
+    "/kaggle/input/mendeley-2025/Dataset_10191.csv"
+  ],
+  "external_other_copies_present_not_used": [
+    "C:/gpu-worker-triggers\\inbox\\Dataset_10191.csv"
+  ],
+  "primary_external_distinct": true,
+  "sha256": "6906f87204a68acb351513ecfaa258be41a876af333525f05df07e14c3d5fae3",
+  "rows": 1000,
+  "HAM": 500,
+  "SPAM": 500,
+  "missing_content": 0,
+  "unique_urls": 998,
+  "exact_dup_urls": 2,
+  "empty_dates": 397
+}

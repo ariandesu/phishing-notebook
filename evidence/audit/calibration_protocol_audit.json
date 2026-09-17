@@ -1,0 +1,16 @@
+{
+  "calibration_model_identity": "FusionNN_OOF_Dev",
+  "calibration_data_source": "development_oof_predictions",
+  "test_labels_used": false,
+  "external_labels_used": false,
+  "temperature_fitted_before_test": true,
+  "relationship_documented": true,
+  "paper_wording_matches": true,
+  "fitted_temperature": 0.8835812315486492,
+  "temperature_finite": true,
+  "temperature_in_bounds": true,
+  "n_oof_rows_used": 801,
+  "optimizer_success": true,
+  "status": "PASS",
+  "failure_reason": null
+}

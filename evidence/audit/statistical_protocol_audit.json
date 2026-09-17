@@ -1,0 +1,9 @@
+{
+  "method_id": "cureton_rank_biserial",
+  "method_name": "Standard rank-biserial correlation",
+  "formula_verified": true,
+  "implementation_verified": true,
+  "bootstrap_b2000": true,
+  "holm_correction_applied": true,
+  "status": "PASS"
+}

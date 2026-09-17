@@ -1,0 +1,19 @@
+{
+  "method_id": "cureton_rank_biserial",
+  "method_name": "Standard rank-biserial correlation",
+  "formula": "r_rb = (R+ - R-) / S,  S = n(n+1)/2",
+  "formula_verified": true,
+  "implementation_verified": true,
+  "n_comparisons": 5,
+  "bootstrap_B": 2000,
+  "holm_correction_applied": true,
+  "r_rb_values": {
+    "LR-TFIDF": 1.0,
+    "LR-SBERT": 1.0,
+    "LR-Structural": -0.7647058823529411,
+    "LR-SBERT+Structural": -1.0,
+    "LR-All": -1.0
+  },
+  "status": "PASS",
+  "failure_reason": null
+}

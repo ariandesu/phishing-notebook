@@ -1,0 +1,114 @@
+[
+  {
+    "Artifact": "hxxp/hxxps",
+    "HAM_count": 0,
+    "SPAM_count": 165,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.33,
+    "Label_association": 0.33
+  },
+  {
+    "Artifact": "defanged [.]",
+    "HAM_count": 3,
+    "SPAM_count": 500,
+    "HAM_rate": 0.006,
+    "SPAM_rate": 1.0,
+    "Label_association": 0.994
+  },
+  {
+    "Artifact": "SYSTEM UPDATE marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "Developer Access Note marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "SYSTEM DIRECTIVE marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "SECURITY ADVISORY marker",
+    "HAM_count": 4,
+    "SPAM_count": 51,
+    "HAM_rate": 0.008,
+    "SPAM_rate": 0.102,
+    "Label_association": 0.094
+  },
+  {
+    "Artifact": "URGENT ACTION marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "IT SUPPORT AUDIT marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "ACCOUNT NOTICE marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "VERIFICATION NOTICE marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "ADMINISTRATOR DIRECTIVE marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "PRIORITY INSTRUCTION marker",
+    "HAM_count": 0,
+    "SPAM_count": 50,
+    "HAM_rate": 0.0,
+    "SPAM_rate": 0.1,
+    "Label_association": 0.1
+  },
+  {
+    "Artifact": "html tag",
+    "HAM_count": 158,
+    "SPAM_count": 167,
+    "HAM_rate": 0.316,
+    "SPAM_rate": 0.334,
+    "Label_association": 0.018
+  },
+  {
+    "Artifact": "explicit URL",
+    "HAM_count": 423,
+    "SPAM_count": 432,
+    "HAM_rate": 0.846,
+    "SPAM_rate": 0.864,
+    "Label_association": 0.018
+  }
+]

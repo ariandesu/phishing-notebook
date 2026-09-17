@@ -1,0 +1,10 @@
+{
+  "n_test": 199,
+  "n_misclassified": 1,
+  "error_rate": 0.005025125628140704,
+  "operating_threshold": 0.66,
+  "min_margin_correct": 0.02992096185684201,
+  "median_margin_correct": 0.3378530704975128,
+  "rows_written": 21,
+  "note": "misclassified rows recorded"
+}

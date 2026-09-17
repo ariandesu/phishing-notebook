@@ -1,0 +1,27 @@
+{
+  "gates": {
+    "external_dataset_integrity_verified": true,
+    "all_models_oof_threshold_verified": true,
+    "external_threshold_protocol_verified": true,
+    "calibration_protocol_verified": true,
+    "operating_point_consistency_verified": true,
+    "paper_result_consistency_verified": true,
+    "master_results_verified": true,
+    "source_manifest_verified": true,
+    "negative_tests_verified": true
+  },
+  "gate_errors": {},
+  "mandatory_gates": [
+    "external_dataset_integrity_verified",
+    "all_models_oof_threshold_verified",
+    "external_threshold_protocol_verified",
+    "calibration_protocol_verified",
+    "operating_point_consistency_verified",
+    "paper_result_consistency_verified",
+    "master_results_verified",
+    "source_manifest_verified",
+    "negative_tests_verified"
+  ],
+  "mandatory_passed": true,
+  "status": "PASS"
+}

@@ -1,0 +1,15 @@
+Artifact,HAM_count,SPAM_count,HAM_rate,SPAM_rate,Label_association
+hxxp/hxxps,0,165,0.0,0.33,0.33
+defanged [.],3,500,0.006,1.0,0.994
+SYSTEM UPDATE marker,0,50,0.0,0.1,0.1
+Developer Access Note marker,0,50,0.0,0.1,0.1
+SYSTEM DIRECTIVE marker,0,50,0.0,0.1,0.1
+SECURITY ADVISORY marker,4,51,0.008,0.102,0.094
+URGENT ACTION marker,0,50,0.0,0.1,0.1
+IT SUPPORT AUDIT marker,0,50,0.0,0.1,0.1
+ACCOUNT NOTICE marker,0,50,0.0,0.1,0.1
+VERIFICATION NOTICE marker,0,50,0.0,0.1,0.1
+ADMINISTRATOR DIRECTIVE marker,0,50,0.0,0.1,0.1
+PRIORITY INSTRUCTION marker,0,50,0.0,0.1,0.1
+html tag,158,167,0.316,0.334,0.018
+explicit URL,423,432,0.846,0.864,0.018

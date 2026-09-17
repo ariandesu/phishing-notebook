@@ -1,0 +1,22 @@
+{
+  "n_rows": 10191,
+  "columns": [
+    "LABEL",
+    "TEXT",
+    "URL",
+    "EMAIL",
+    "PHONE"
+  ],
+  "label_column": "LABEL",
+  "text_column": "TEXT",
+  "unique_raw_labels": [
+    "ham",
+    "smishing",
+    "spam"
+  ],
+  "ham_n": 3397,
+  "spam_n": 6794,
+  "n_unique_binary_labels": 2,
+  "unknown_labels": [],
+  "status": "PASS"
+}

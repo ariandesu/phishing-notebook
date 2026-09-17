@@ -1,0 +1,169 @@
+{
+  "checks": {
+    "A. Exact notebook identity": true,
+    "B. Primary dataset integrity": true,
+    "C. External dataset identity": true,
+    "D. Group leakage integrity": true,
+    "E. 5x5 grouped CV completed": true,
+    "F. OOF completeness": true,
+    "G. FusionNN threshold integrity": true,
+    "H. DistilBERT threshold integrity": true,
+    "I. Template holdout integrity": true,
+    "J. Artifact robustness completed": true,
+    "K. URL-domain holdout completed": true,
+    "L. Adversarial evaluation completed": true,
+    "M. Calibration integrity": true,
+    "N. Group bootstrap B=2000": true,
+    "O. 10/10 fail-closed negative tests": true,
+    "P. Source audit": true,
+    "Q. Clean-kernel execution": true,
+    "R. No frozen/manual results": true,
+    "S. Master-result consistency": true,
+    "T. Paper-result consistency": true,
+    "U. Actual GPU verification": true
+  },
+  "evidence": {
+    "A. Exact notebook identity": {
+      "filename": "trac 9.1.ipynb",
+      "sha256": "c391a6ec2b0b77783f3aeb39b0fd20323ee2b9020ee7914197e7f5eb113d23fd",
+      "code_cells": 31,
+      "parse_error": null
+    },
+    "B. Primary dataset integrity": {
+      "path": "C:\\Users\\hermes\\workspace\\trac9_desktop\\ham_spam_dataset.csv",
+      "rows": 1000,
+      "HAM": 500,
+      "SPAM": 500,
+      "sha256": "6906f87204a68acb..."
+    },
+    "C. External dataset identity": {
+      "n_rows": 10191,
+      "labels": [
+        "ham",
+        "smishing",
+        "spam"
+      ],
+      "binary_label_count": 2,
+      "external_n_used_in_threshold": 10191
+    },
+    "D. Group leakage integrity": {
+      "max_fold_group_overlap": 0,
+      "total_missing_oof_rows": 0,
+      "total_duplicate_oof_rows": 0,
+      "template_holdout_max_group_overlap": 0
+    },
+    "E. 5x5 grouped CV completed": {
+      "fusion_cv_rows": 25,
+      "seeds": 5,
+      "folds": 5,
+      "classical_cv_rows": 125
+    },
+    "F. OOF completeness": {
+      "models_audited": 7,
+      "per_model_complete": {
+        "FusionNN": true,
+        "LR-TFIDF": true,
+        "LR-SBERT": true,
+        "LR-Structural": true,
+        "LR-SBERT+Structural": true,
+        "LR-All": true,
+        "DistilBERT": true
+      }
+    },
+    "G. FusionNN threshold integrity": {
+      "threshold": 0.66,
+      "source": "development_oof",
+      "test_labels_used": false,
+      "external_labels_used": false
+    },
+    "H. DistilBERT threshold integrity": {
+      "distilbert_threshold": 0.1,
+      "fusion_threshold": 0.66,
+      "source": "development_oof",
+      "thresholds_differ_or_independent": true,
+      "distilbert_threshold_self_sourced": true,
+      "status": "PASS"
+    },
+    "I. Template holdout integrity": {
+      "n_templates": 10,
+      "max_group_overlap": 0,
+      "min_eval_rows": 72
+    },
+    "J. Artifact robustness completed": {
+      "stripping_summary_rows": 6,
+      "component_ablation_rows": 5
+    },
+    "K. URL-domain holdout completed": {
+      "rows": 48,
+      "domains_evaluated": 8
+    },
+    "L. Adversarial evaluation completed": {
+      "adversarial_rows": 12,
+      "adversarial_rates": 4,
+      "obfuscation_summary_rows": 3
+    },
+    "M. Calibration integrity": {
+      "source": "development_oof_predictions",
+      "temperature": 0.8835812315486492,
+      "test_labels_used": false,
+      "optimizer_success": true
+    },
+    "N. Group bootstrap B=2000": {
+      "B": 2000,
+      "unit": "leakage_group",
+      "ci_method": "percentile_95",
+      "threshold_match": true
+    },
+    "O. 10/10 fail-closed negative tests": {
+      "n_passed": 10,
+      "n_tests": 10
+    },
+    "P. Source audit": {
+      "notebook_file": "trac 9.1.ipynb",
+      "actual_hash_matches": true,
+      "expected_hash": "42d6bdb0afa29a85..."
+    },
+    "Q. Clean-kernel execution": {
+      "code_cells": 31,
+      "kernel_execution_count": 31,
+      "kernel_uptime_seconds": 1041.9,
+      "all_upstream_artifacts_present": true,
+      "sequential_full_run": true
+    },
+    "R. No frozen/manual results": {
+      "frozen_threshold_alias": 0,
+      "frozen_temperature_alias": 0,
+      "hardcoded_external_n": 0,
+      "hardcoded_test_n": 0,
+      "inverted_legacy_flag": 0,
+      "arbitrary_index_selection": 0,
+      "banned_patterns_found": 0
+    },
+    "S. Master-result consistency": {
+      "total_rows": 223,
+      "expected_test_n": 199,
+      "expected_external_n": 10191
+    },
+    "T. Paper-result consistency": {
+      "derived_metrics": {
+        "fusion_clean_f1": 0.9806451612903225,
+        "fusion_external_roc_auc": 0.6423806690503985,
+        "fusion_external_f1": 0.00849692352768825
+      },
+      "fallback_hits": []
+    },
+    "U. Actual GPU verification": {
+      "device_name": "NVIDIA GeForce RTX 4060",
+      "total_vram_gb": 8.0,
+      "peak_allocated_mb": 2308.9,
+      "distilbert_device": "cuda:0",
+      "sbert_device": "cuda",
+      "fusionnn_device": "cuda"
+    }
+  },
+  "failing_items": [],
+  "n_checks": 21,
+  "n_passed": 21,
+  "overall": "PASS",
+  "notebook_sha256": "c391a6ec2b0b77783f3aeb39b0fd20323ee2b9020ee7914197e7f5eb113d23fd"
+}

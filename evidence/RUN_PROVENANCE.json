@@ -1,0 +1,60 @@
+{
+  "notebook": "trac 9.1.ipynb",
+  "run_date_utc": "2026-09-17T18:02:29.383767+00:00",
+  "execution_host": "DESKTOP-QMR8RM8 (Windows, Python 3.10.11)",
+  "gpu": "NVIDIA GeForce RTX 4060, 8.00 GB VRAM, compute capability 8.9",
+  "torch": "2.5.1+cu121",
+  "cuda_version": "12.1",
+  "execution_method": "fresh kernel: python -m nbconvert --to notebook --execute (ExecutePreprocessor.timeout=14400)",
+  "code_cells": 31,
+  "cells_with_execution_count": 31,
+  "error_outputs": 0,
+  "inline_figures_base64": 5,
+  "primary_dataset": {
+    "name": "ham_spam_dataset.csv",
+    "rows": 1000,
+    "columns": 6,
+    "sha256": "6906f87204a68acb351513ecfaa258be41a876af333525f05df07e14c3d5fae3",
+    "role": "in-domain primary benchmark",
+    "resolution": "explicit declared path order (fail-closed, no glob indexing)"
+  },
+  "external_dataset": {
+    "name": "Dataset_10191.csv",
+    "rows": 10191,
+    "sha256": "68f464b4276d6c7e6967fccadb48e443cf3330dd529bd750ff237db98c33d08e",
+    "columns": [
+      "LABEL",
+      "TEXT",
+      "URL",
+      "EMAIL",
+      "PHONE"
+    ],
+    "raw_labels": {
+      "ham": 3397,
+      "smishing": 3397,
+      "spam": 3397
+    },
+    "binarisation": "smishing/spam -> 1, ham -> 0 (2 unique binary labels)",
+    "role": "external transfer evaluation",
+    "distinct_from_primary": true
+  },
+  "final_gate": {
+    "overall": "PASS",
+    "n_passed": 21,
+    "n_checks": 21,
+    "failing_items": []
+  },
+  "repaired_defect_classes": [
+    "frozen threshold alias removed",
+    "hardcoded external/test row-count fallbacks removed",
+    "inverted 'no hardcoded n' audit flag replaced with real provenance check",
+    "forced manifest PASS branch (else: actual_hash = expected_hash) removed",
+    "arbitrary glob-index dataset selection replaced with explicit fail-closed resolution",
+    "target leakage: train_fusion best-epoch selection on the evaluation fold fixed at all 6 call sites",
+    "double standard-scaling in eval_matrix/combos fixed (scale exactly once)",
+    "FusionNN modality-dropout bypass via residual path fixed",
+    "FusionNN + DistilBERT moved onto CUDA with AMP; CPU/GPU tensor mismatch fixed",
+    "10 negative tests replaced with genuine fail-closed rejection tests",
+    "hardcoded 'status': 'PASS' audit booleans replaced with computed statuses"
+  ]
+}

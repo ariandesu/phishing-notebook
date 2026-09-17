@@ -1,0 +1,17 @@
+{
+  "models_audited": 7,
+  "expected_models": 7,
+  "external_labels_used_for_threshold": false,
+  "threshold_source": "development_oof",
+  "per_model_thresholds": {
+    "FusionNN": 0.66,
+    "LR-TFIDF": 0.47,
+    "LR-SBERT": 0.64,
+    "LR-Structural": 0.51,
+    "LR-SBERT+Structural": 0.33,
+    "LR-All": 0.33,
+    "DistilBERT": 0.1
+  },
+  "status": "PASS",
+  "failure_reason": null
+}

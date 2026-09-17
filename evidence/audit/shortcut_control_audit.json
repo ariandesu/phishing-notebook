@@ -1,0 +1,9 @@
+{
+  "feature": "has_defanged",
+  "ham_artifact_rate": 0.006,
+  "spam_artifact_rate": 1.0,
+  "artifact_association": 0.994,
+  "univariate_auc": 0.997,
+  "shortcut_identified": true,
+  "status": "PASS = shortcut successfully identified, not \"shortcut fixed\""
+}

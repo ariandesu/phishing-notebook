@@ -1,0 +1,2 @@
+f1_ci95,f1_mean,mcc_ci95,mcc_mean,roc_auc_ci95,roc_auc_mean,pr_auc_ci95,pr_auc_mean,accuracy_ci95,accuracy_mean,n_bootstraps,bootstrap_unit,seed,ci_method,threshold_used
+"[0.9843, 1.0]",0.9951,"[0.9698, 1.0]",0.9898,"[1.0, 1.0]",1.0,"[1.0, 1.0]",1.0,"[0.9849, 1.0]",0.9949,2000,leakage_group,42,percentile_95,0.66

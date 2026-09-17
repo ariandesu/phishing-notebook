@@ -1,0 +1,64 @@
+{
+  "models_audited": 7,
+  "expected_models": 7,
+  "threshold_selected_from_development_only": true,
+  "external_labels_used_in_threshold_selection": false,
+  "external_labels_used_for_threshold": false,
+  "threshold_fixed_before_external_evaluation": true,
+  "threshold_source": "development_oof",
+  "external_n": 10191,
+  "external_rows_used_for_threshold_selection": 0,
+  "per_model": {
+    "FusionNN": {
+      "threshold": 0.66,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.00849692352768825
+    },
+    "LR-TFIDF": {
+      "threshold": 0.47,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.2248291865411886
+    },
+    "LR-SBERT": {
+      "threshold": 0.64,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.09313316652766195
+    },
+    "LR-Structural": {
+      "threshold": 0.51,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.0
+    },
+    "LR-SBERT+Structural": {
+      "threshold": 0.33,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.0011768167107972932
+    },
+    "LR-All": {
+      "threshold": 0.33,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.0011768167107972932
+    },
+    "DistilBERT": {
+      "threshold": 0.1,
+      "threshold_source": "development_oof",
+      "external_n": 10191,
+      "external_labels_used_for_threshold": false,
+      "external_f1": 0.589281498386716
+    }
+  },
+  "status": "PASS",
+  "failure_reason": null
+}

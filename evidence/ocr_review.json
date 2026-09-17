@@ -1,0 +1,333 @@
+{
+  "pass1_source": "original 'notebooks run/trac 9.1.ipynb' (pre-repair)",
+  "pass1_findings_total": 12,
+  "pass2_source": "repaired notebook, 31 code cells",
+  "pass2_reports": 31,
+  "pass2_findings_total": 60,
+  "pass2_by_severity": {
+    "medium": 26,
+    "high": 14,
+    "low": 18,
+    "critical": 2
+  },
+  "pass2_findings": [
+    {
+      "cell": "cell01",
+      "severity": "medium",
+      "content": "If `path` is a simple filename without any directory path (e.g., `save_json(data, \"results.json\")`), `os.path.dirname(path)` returns an empty string `\"\"`. In Python, calling `os.makedirs(\"\", exist_ok=True)` raises `FileNotFoundError: [Errno 2] No such file or directory: ''`. \n\nTo prevent this runtime failure, check if `os.path.dirname(path)` is non-empty before calling `os.makedirs`."
+    },
+    {
+      "cell": "cell01",
+      "severity": "medium",
+      "content": "Instantiating `rng = random.Random(seed)` inside `obfuscate` resets the random generator seed for every function call. When processing a dataset (e.g., in a list comprehension across multiple text strings), every text string will be processed with the exact same initial PRNG sequence, causing identical obfuscation choices across all items in the dataset rather than pseudo-random variation across texts.\n\nConsider allowing an optional `rng` instance to be passed in, or instantiating `rng` outside the per-string function."
+    },
+    {
+      "cell": "cell03",
+      "severity": "high",
+      "content": "The `json` module is referenced here (`json.dump`), but it is not imported anywhere in the module. This will result in a runtime `NameError: name 'json' is not defined` when executing this cell. `import json` should be added to the top-level imports."
+    },
+    {
+      "cell": "cell03",
+      "severity": "low",
+      "content": "The variable `candidate_paths` is defined but never read or referenced anywhere in this cell/file. If explicit paths and precedence are managed via `PRIMARY_EXPLICIT_PATHS` and `resolve_explicit_dataset`, this unused list can be removed."
+    },
+    {
+      "cell": "cell03",
+      "severity": "low",
+      "content": "`glob` and `Path` are imported but never used in this cell. Unused imports should be removed to keep the file clean."
+    },
+    {
+      "cell": "cell04",
+      "severity": "medium",
+      "content": "If `df['content']` contains missing (`NaN`) values, `Series.str.contains()` returns `NaN` for those rows by default. This causes `hits` to contain `NaN` values, which excludes missing entries from the denominator when computing `.mean()` (distorting the HAM/SPAM artifact rates) rather than counting them as non-matches. Explicitly passing `na=False` ensures missing text entries are treated as `False` and returns a clean boolean Series."
+    },
+    {
+      "cell": "cell05",
+      "severity": "critical",
+      "content": "The functions `normalize_text`, `template_text`, and `source_domain` use the standard library `re` module (e.g., `re.sub`, `re.search`), but `re` is not imported anywhere in this file. Executing `normalize_text` or `template_text` will raise a `NameError: name 're' is not defined`."
+    },
+    {
+      "cell": "cell05",
+      "severity": "critical",
+      "content": "`TfidfVectorizer` is used to create TF-IDF character n-gram vectors, but `TfidfVectorizer` has not been imported (e.g. `from sklearn.feature_extraction.text import TfidfVectorizer`). Running this code will raise a `NameError: name 'TfidfVectorizer' is not defined`."
+    },
+    {
+      "cell": "cell05",
+      "severity": "high",
+      "content": "`np.mean` and numpy functions are called in the grouping statistics computation (`np.mean(...)`), but `numpy` (as `np`) is not imported. Calling `np.mean` will raise `NameError: name 'np' is not defined`."
+    },
+    {
+      "cell": "cell05",
+      "severity": "high",
+      "content": "`save_json`, `OUTPUT_DIR`, and `os` are referenced to persist audit files (`save_json(...)`, `os.path.join(OUTPUT_DIR, ...)`), but `os` and `OUTPUT_DIR` / `save_json` are not defined or imported in this file. Missing `os` import or undefined variable names will raise `NameError` at runtime."
+    },
+    {
+      "cell": "cell06",
+      "severity": "low",
+      "content": "The variable `w` is calculated but never referenced within `structural_feats` or included in the returned dictionary."
+    },
+    {
+      "cell": "cell06",
+      "severity": "medium",
+      "content": "Inconsistent regex pattern for defanged indicators: `defanged_count` searches for `hxxp` and `[.]` but omits `hxtp`, whereas `has_defanged` (line 21) searches for `hxxp|hxtp|\\[\\.\\]`. Text containing `hxtp` will be flagged by `has_defanged` but missed by `defanged_count`."
+    },
+    {
+      "cell": "cell06",
+      "severity": "medium",
+      "content": "`feat_df` is initialized without preserving `df.index`, defaulting to `RangeIndex(0, len(df))`. If `df` has non-sequential or filtered index labels, `pd.concat([df, feat_df], axis=1)` on line 32 will perform index-based alignment, resulting in unexpected `NaN` values or row misalignment."
+    },
+    {
+      "cell": "cell07",
+      "severity": "low",
+      "content": "`TEMPLATE_PHRASES` contains phrase tuples where the text string contains uppercase letters (e.g. `'[verify your account credentials]'` or `'A critical patch...'`). In `assign_template`, `phrase.lower()` is evaluated inside the `for` loop on every function call for every template entry, recomputing `phrase.lower()` unnecessarily. More importantly, if `normalize_text` replaces characters or normalizes spaces in a specific way, `phrase.lower()` might not be fully normalized against `normalize_text(phrase)`, potentially failing to match if `phrase` contains punctuation/spacing differences that `normalize_text` would transform. Consider pre-normalizing `TEMPLATE_PHRASES` using `normalize_text(phrase)` outside the function loop."
+    },
+    {
+      "cell": "cell08",
+      "severity": "medium",
+      "content": "Using `assert` for runtime dataset integrity validation (ensuring zero leakage group overlap between train and test splits) is risky because assertions are stripped when Python is executed with optimization flags (`python -O`). If assertions are disabled, data leakage across splits would go undetected. Use an explicit exception check instead."
+    },
+    {
+      "cell": "cell08",
+      "severity": "low",
+      "content": "The metadata dictionary hardcodes `'overlap': 0` instead of recording the dynamically computed variable `GROUP_OVERLAP_MAIN` (or `len(overlap)`). If the validation step is bypassed, the recorded metadata JSON will report 0 overlap regardless of actual data state. Using `GROUP_OVERLAP_MAIN` guarantees the output metadata accurately reflects the split calculation."
+    },
+    {
+      "cell": "cell09",
+      "severity": "high",
+      "content": "`average_precision_score(y, p)` is not guarded against inputs where `y` contains only one unique class (e.g., all 0s). While `roc_auc` on line 12 explicitly checks `if len(np.unique(y)) == 2 else float('nan')`, `average_precision_score` will raise a `ValueError` when `y` lacks positive samples. Guarding `average_precision_score` similarly prevents runtime crashes when evaluating single-class folds or subsets."
+    },
+    {
+      "cell": "cell09",
+      "severity": "medium",
+      "content": "In scikit-learn, `PCA` requires `n_components <= min(n_samples, n_features)`. `min(pca_dim, fold['sb_tr'].shape[1])` caps `n_components` by the feature count (`shape[1]`), but fails to account for sample count (`fold['sb_tr'].shape[0]`). If `n_samples < pca_dim`, `PCA.fit()` will raise a `ValueError`."
+    },
+    {
+      "cell": "cell09",
+      "severity": "low",
+      "content": "The docstring states that `build_fold_features` returns a 5-element tuple `(X_train, X_val, y_train, y_val, names)`, but the actual function returns a dictionary mapping feature keys (`'sb_tr'`, `'sb_va'`, etc.). Updating the docstring to accurately describe the dictionary return type will improve maintainability."
+    },
+    {
+      "cell": "cell11",
+      "severity": "low",
+      "content": "The variable `texts_all` is defined here but never read or referenced anywhere in this script. If it is unused leftover code, consider removing it to avoid unnecessary computation and memory usage."
+    },
+    {
+      "cell": "cell12",
+      "severity": "medium",
+      "content": "When disabling any modality (`use_sbert=False`, `use_struct=False`, or `use_tfidf=False`), the fallback zero array hardcodes a feature dimension of `2` instead of preserving the modality's actual feature dimension (e.g. `fold['sb_tr'].shape[1]`). This causes an artificial dimension mismatch when running modality ablation or when zeroing out features."
+    },
+    {
+      "cell": "cell12",
+      "severity": "high",
+      "content": "`train_fusion` is called without passing `fixed_epochs=FUSION_CV_EPOCHS`. As a result, `fixed_epochs` defaults to `None`, causing `train_fusion` to restore `best_state` (the best validation epoch checkpoint). This contradicts the intended fixed epoch budget policy described in the comments and produces evaluation predictions `pva` from early stopping while logging `best_epoch = FUSION_CV_EPOCHS`."
+    },
+    {
+      "cell": "cell13",
+      "severity": "medium",
+      "content": "Tokenizing single text items inside '__getitem__' invokes the HuggingFace tokenizer on-the-fly for every item in every epoch and evaluation pass. This creates a significant CPU bottleneck during PyTorch DataLoader batching. Pre-tokenizing all texts in '__init__' using batch tokenization (or encoding prior to dataset initialization) eliminates redundant re-tokenization and speeds up execution."
+    },
+    {
+      "cell": "cell14",
+      "severity": "low",
+      "content": "Variable `dev_groups` is defined on line 14 but never used in the script. Consider removing it if it is unnecessary."
+    },
+    {
+      "cell": "cell15",
+      "severity": "high",
+      "content": "`torch.inference_mode()` disables gradient tracking but does not set the PyTorch model to evaluation mode. Without calling `_m.eval()`, layers such as `nn.Dropout` or `nn.BatchNorm` will operate in training mode during test evaluation, introducing randomness (e.g. dropping neurons during inference) and producing inaccurate evaluation metrics."
+    },
+    {
+      "cell": "cell15",
+      "severity": "medium",
+      "content": "`range(3)` assumes `te_texts` contains at least 3 elements. If `te_texts` has fewer than 3 items (such as during unit tests or on small test subsets), indexing `te_texts[i]` will raise an `IndexError`. Bound the iteration limit using `range(min(3, len(te_texts)))`."
+    },
+    {
+      "cell": "cell16",
+      "severity": "medium",
+      "content": "`abl_sum.to_csv(...)` is called before `delta_f1_vs_full` is computed and assigned to `abl_sum`. Consequently, `fusion_modality_ablation_summary.csv` will not contain the `delta_f1_vs_full` column. Calculate and append `delta_f1_vs_full` prior to exporting the DataFrame to CSV."
+    },
+    {
+      "cell": "cell17",
+      "severity": "medium",
+      "content": "The summary counts (`domains_evaluated` and `domains_skipped`) are calculated and logged before iterating through the domains. Because domains with a single class in train or test are skipped inside the loop (`if n_te == 0 or len(np.unique(y_all[tr_mask])) < 2 or len(np.unique(yva_dom)) < 2: continue`), the printed summary miscounts skipped single-class domains as evaluated, giving inaccurate summary figures. Summary counts should either be computed after checking domain class distributions or updated dynamically after the loop finishes."
+    },
+    {
+      "cell": "cell18",
+      "severity": "medium",
+      "content": "The dataset evaluation matrix `Xdev_all` and model training `clf_all.fit(Xdev_all, y_all)` do not depend on `rate` or the obfuscated test texts. Fitting `LogisticRegression` inside the loop redundantly trains the classifier on the same dev set in every loop iteration. Moving `clf_all` initialization, `Xdev_all` calculation, and `clf_all.fit(...)` outside the `for rate in ...` loop will avoid unnecessary retraining."
+    },
+    {
+      "cell": "cell19",
+      "severity": "low",
+      "content": "Calling `.fit(txt_tr)` prior to `vec_tr.fit_transform(txt_tr)` is redundant because `fit_transform` already fits the vectorizer internally. This causes `TfidfVectorizer` to fit the corpus twice in every fold iteration of the 5-fold cross-validation loop."
+    },
+    {
+      "cell": "cell19",
+      "severity": "medium",
+      "content": "Inside the 5-fold cross-validation loop, a new `DistilBertForSequenceClassification` model and `Trainer` instance are instantiated per fold. Their references and associated CUDA tensor allocations remain active in GPU memory across iterations, which risks causing a CUDA Out-Of-Memory (OOM) error over 5 sequential folds. Deleting `dbert_fold` and `dtrainer_fold` and invoking `torch.cuda.empty_cache()` at the end of each fold iteration helps free allocated VRAM."
+    },
+    {
+      "cell": "cell20",
+      "severity": "high",
+      "content": "The strict assertion checks requiring exact string equality with `'LABEL'` and `'TEXT'` break the dynamic semantic column detection logic implemented immediately above. The detector supports candidate column names like `['label', 'target', 'class', 'category']` and `['text', 'content', 'message', 'sms']`. If an external dataset uses a valid candidate column such as `'target'`, `'message'`, or lower-case `'label'`/`'text'`, `ext_label_col` and `ext_content_col` will be populated correctly by the detector, but these assertions will trigger an `AssertionError` at runtime."
+    },
+    {
+      "cell": "cell20",
+      "severity": "medium",
+      "content": "`model_thresholds` is accessed without verifying its existence in `globals()`. If `model_thresholds` is not defined, evaluating `len(model_thresholds)` will raise a `NameError`. Unlike lines 40 and 43 which guard with `'model_thresholds' in globals()`, line 41 checks `'ext_raw' in globals()` instead."
+    },
+    {
+      "cell": "cell20",
+      "severity": "low",
+      "content": "Unused imports `glob` and `torch` are imported at the top of the module but never referenced within this file."
+    },
+    {
+      "cell": "cell21",
+      "severity": "high",
+      "content": "The status printed to standard output is hardcoded to \"PASS\" regardless of the evaluated `bootstrap_audit['status']`. If the audit checks fail and `bootstrap_audit['status']` is set to `\"FAIL\"`, stdout will still display `\"BOOTSTRAP STATUS: PASS\"`, leading to deceptive verification logs."
+    },
+    {
+      "cell": "cell21",
+      "severity": "medium",
+      "content": "Comparing floating-point values using exact equality (`==`) is risky because minor floating-point representation differences can cause assertions or comparisons to fail unexpectedly. Use `math.isclose` or `np.isclose` with an appropriate tolerance instead."
+    },
+    {
+      "cell": "cell21",
+      "severity": "low",
+      "content": "`boot_ci` is saved to JSON on line 46 before metadata attributes (`n_bootstraps`, `bootstrap_unit`, `seed`, `ci_method`, `threshold_used`) are attached, and then saved again to the same file path on line 56. Furthermore, exporting `boot_ci` to CSV prior to adding these fields results in a CSV output missing important metadata. Populate the metadata before saving/exporting."
+    },
+    {
+      "cell": "cell21",
+      "severity": "low",
+      "content": "`uniq_g` is assigned on line 10 but never used or referenced elsewhere in the file."
+    },
+    {
+      "cell": "cell22",
+      "severity": "high",
+      "content": "The code uses `json.dump(...)` at lines 89 and 119, but `import json` is missing from `cell22.py`. Running this script/cell directly or in an environment where `json` is not imported will raise a `NameError: name 'json' is not defined`."
+    },
+    {
+      "cell": "cell22",
+      "severity": "medium",
+      "content": "The check `max(abs(r['r_rb'] - _rrb_reference(fus_scores - cv_df[cv_df['model'] == r['baseline_model']]['f1'].values)) for r in stat_rows)` assumes that `fus_scores` and `cv_df[cv_df['model'] == r['baseline_model']]['f1'].values` are paired row-by-row in matching fold order. If `cv_df` contains rows ordered differently from `fusion_cv_df` (or if fold/seed ordering differs), subtracting `.values` directly without alignment by `['seed', 'fold']` compares mismatched CV folds.\n\nFurthermore, line 26 (`m_scores = cv_df[cv_df['model'] == mname]['f1'].values`) also implicitly assumes that `fusion_cv_df['f1'].values` and `cv_df`'s F1 scores for each model have identical fold/seed order. Matching explicitly on `['seed', 'fold']` before taking differences would guarantee paired comparisons."
+    },
+    {
+      "cell": "cell23",
+      "severity": "medium",
+      "content": "Comparing floating-point numbers directly using `==` can fail unexpectedly due to minor precision or floating-point representation differences. Use `math.isclose()` or `np.isclose()` with an appropriate tolerance instead."
+    },
+    {
+      "cell": "cell23",
+      "severity": "medium",
+      "content": "If `y_test` or `TEST_OPERATING_PREDICTIONS` contains only one unique class (e.g. in edge cases or subset evaluation), `confusion_matrix` will return a 1x1 matrix instead of a 2x2 matrix. Subsequent unpacking of `tn, fp, fn, tp = TEST_CONFUSION_MATRIX.ravel()` will raise a `ValueError`. Pass `labels=[0, 1]` to guarantee a 2x2 output matrix shape."
+    },
+    {
+      "cell": "cell23",
+      "severity": "medium",
+      "content": "Writing audit JSON files to `OUTPUT_DIR/audit` assumes the target directory already exists. If `OUTPUT_DIR/audit` has not been created yet, `open()` will raise a `FileNotFoundError`. Create the `audit` directory using `os.makedirs(..., exist_ok=True)` before opening files in it (as is done for `OUTPUT_DIR/results` on line 28)."
+    },
+    {
+      "cell": "cell24",
+      "severity": "high",
+      "content": "`FIGURE_PREDICTIONS` and `FIGURE_CM` are conditionally assigned inside the Fig 3 block (only when `'TEST_OPERATING_PREDICTIONS'` and `'TEST_CONFUSION_MATRIX'` are in `globals()`). If those global variables are absent, Fig 3 is skipped and `FIGURE_PREDICTIONS` and `FIGURE_CM` remain undefined, causing a `NameError` during post-figure audit verification. Check if `FIGURE_PREDICTIONS` and `FIGURE_CM` are defined in `globals()` or guard the verification block accordingly."
+    },
+    {
+      "cell": "cell24",
+      "severity": "medium",
+      "content": "The Fig 5 block uses `y_test` in `rel_curve(y_test, ...)` but does not verify whether `'y_test'` exists in `globals()`, unlike `TEST_FUSION_PROBABILITIES` and `TEMP_FITTED`. If `y_test` is not defined in global scope, running this section will trigger a `NameError`."
+    },
+    {
+      "cell": "cell24",
+      "severity": "low",
+      "content": "The variable `order` is computed by calculating mean F1 per model and sorting, but it is never passed to `cv_df.boxplot(...)` or used anywhere else in the code."
+    },
+    {
+      "cell": "cell25",
+      "severity": "medium",
+      "content": "The assertion verifying 'test_df' in globals() is placed at line 112, but 'test_df' is already referenced at line 66 (int(len(test_df))) and line 79 (len(test_df)). If 'test_df' is missing from global scope, a NameError will occur during row construction prior to reaching this assertion."
+    },
+    {
+      "cell": "cell25",
+      "severity": "low",
+      "content": "The check for 'no_hardcoded_n_in_master' is tautological. Since 'expected_ext_n' and 'expected_test_n' are assigned 'int(len(ext_raw))' and 'int(len(test_df))' on lines 114-115, comparing them back to 'int(len(ext_raw))' and 'int(len(test_df))' will always evaluate to True without performing a meaningful validation."
+    },
+    {
+      "cell": "cell25",
+      "severity": "high",
+      "content": "The directory `os.path.join(OUTPUT_DIR, 'audit')` is not guaranteed to exist when attempting to write `master_results_audit.json`. Unlike line 104 where `os.makedirs(..., exist_ok=True)` is called for the `results` folder, writing to `master_results_audit.json` without ensuring the `audit` directory exists will raise a `FileNotFoundError`."
+    },
+    {
+      "cell": "cell26",
+      "severity": "low",
+      "content": "The modules `sys` and `glob` are imported but never referenced in this file. Unused imports should be removed."
+    },
+    {
+      "cell": "cell27",
+      "severity": "low",
+      "content": "`glob` is imported but never referenced in this cell."
+    },
+    {
+      "cell": "cell27",
+      "severity": "medium",
+      "content": "The pattern `r'=\\s*0\\.(9952|3846|7971)\\b'` uses a capturing group `(...)`. When `re.findall` is called with a pattern containing capturing groups, it returns only the captured group text (e.g., `'9952'`) rather than the entire matched pattern string (e.g., `'= 0.9952'`), unlike the other entries in `PAPER_FALLBACK_PATTERNS`. Using a non-capturing group `(?:...)` ensures `re.findall` returns the full matched string in `fallback_hits`."
+    },
+    {
+      "cell": "cell27",
+      "severity": "medium",
+      "content": "`open()` is called to write to `os.path.join(OUTPUT_DIR, 'audit', 'paper_result_consistency_audit.json')` without first ensuring that the `audit` output subdirectory exists. If this cell is run stand-alone or in a clean directory structure, `open()` will fail with `FileNotFoundError`. Call `os.makedirs(os.path.join(OUTPUT_DIR, 'audit'), exist_ok=True)` before opening the file."
+    },
+    {
+      "cell": "cell28",
+      "severity": "low",
+      "content": "In `t10_threshold_model_mismatch`, `bad[\"DistilBERT\"]` sets `(float(good[\"FusionNN\"][0]), \"borrowed_from_FusionNN\")`.\n`validate_threshold_model_map` validates provenance by checking `if src is None or 'dev' not in str(src).lower(): raise ValidationError(...)`.\nBecause string `\"borrowed_from_FusionNN\"` contains `\"dev\"` (inside `\"borrowed_from_dev...\"` - wait, `\"borrowed_from_FusionNN\"` does NOT contain `\"dev\"`? Let's check: b-o-r-r-o-w-e-d-_-f-r-o-m-_-F-u-s-i-o-n-N-N. Wait, does it contain 'dev'?).\n\nWait! Let's check: \"borrowed_from_FusionNN\".\nWait, does \"borrowed_from_FusionNN\" contain \"dev\"? No, but wait: is there any issue with `t10_threshold_model_mismatch`?\nLet's check `good[\"DistilBERT\"] = (float(good[\"FusionNN\"][0]), \"borrowed_from_FusionNN\")`.\nWait, why does `validate_threshold_model_map` reject `bad`?\nBecause `validate_threshold_model_map` checks:\n1) `th` is in grid? `float(good[\"FusionNN\"][0])` IS in grid!\n2) `src` contains `'dev'`? `\"borrowed_from_FusionNN\"` does NOT contain `'dev'`, so it raises `ValidationError(\"DistilBERT: threshold provenance 'borrowed_from_FusionNN' is not development-derived\")`.\nWait! Is `t10_threshold_model_mismatch` testing threshold/model mismatch or provenance rejection?\nWait, if it set `\"borrowed_from_FusionNN\"` as provenance, it's rejected due to invalid provenance (`'dev'` not in string), but the test description says `10 threshold/model mismatch rejected`.\nWait! Let's check if there are any real bugs in cell28.py."
+    },
+    {
+      "cell": "cell29",
+      "severity": "low",
+      "content": "Unused import: `numpy` (`np`) is imported but never referenced in this module."
+    },
+    {
+      "cell": "cell29",
+      "severity": "medium",
+      "content": "If both `n_oof` and `n_development` keys are absent in a model dictionary `v` (or set to `None`), `v.get('n_oof')` and `v.get('n_development')` both return `None`. Since `None == None` evaluates to `True`, this check will falsely pass even if these keys are missing. Verify that `v.get('n_oof')` is not `None` before comparing."
+    },
+    {
+      "cell": "cell29",
+      "severity": "medium",
+      "content": "If `bootstrap_audit.json` contains `\"bootstrap_B\": null`, `.get('bootstrap_B', 0)` returns `None` (because the key exists in the dict). Passing `None` to `int()` raises a runtime `TypeError`. Comparing `_boot_a.get('bootstrap_B') == 2000` directly avoids the exception."
+    },
+    {
+      "cell": "cell31",
+      "severity": "high",
+      "content": "`_nb_code` is assigned inside the `try` block. If `json.loads` or `.decode()` raises an exception, execution enters the `except Exception:` block where `_nb_ok = False` is set, but `_nb_code` remains unassigned. Attempting to access `len(_nb_code)` in the `set_gate(...)` call outside the `try-except` block will raise an `UnboundLocalError`. `_nb_code` should be initialized prior to the `try` block (e.g. `_nb_code = []`)."
+    },
+    {
+      "cell": "cell31",
+      "severity": "high",
+      "content": "Two issues in this block:\n1. `'independent_of_fusionnn': bool(abs(_db_th - _fus_th) > 0 or True)` contains a redundant `or True` clause, causing the expression to always evaluate to `True` and rendering the threshold independence check ineffective.\n2. Direct key lookup `_oof['per_model_audit']['FusionNN']` assumes `'FusionNN'` is present in `per_model_audit`, but the `if` condition only checked `'DistilBERT' in _oof.get('per_model_audit', {})`. If `'FusionNN'` is missing, a `KeyError` will be raised."
+    },
+    {
+      "cell": "cell31",
+      "severity": "high",
+      "content": "`_time` is used (`_time.time()`) but is never imported (`import time` or `import time as _time` is absent). Calling `_time.time()` will fail with `NameError: name '_time' is not defined`."
+    }
+  ],
+  "resolved_in_repair": [
+    "json/re imports reported per-cell are FALSE POSITIVES (imports live in Cell 1; cells were reviewed in isolation)",
+    "train_fusion fixed_epochs (cell12) -> FIXED",
+    "inference_mode without eval() (cell15) -> FIXED",
+    "FIGURE_PREDICTIONS NameError (cell24) -> FIXED",
+    "pr_auc single-class crash (cell09) -> FIXED",
+    "audit dir not created before master audit write (cell25) -> FIXED",
+    "'status printed hardcoded PASS' (cell21) -> FIXED",
+    "bootstrap_ci saved before metadata attached (cell21) -> FIXED",
+    "gate _nb_code unbound on JSON parse failure (cell31) -> FIXED",
+    "gate 'or True' tautology in threshold-independence check (cell31) -> FIXED",
+    "module-level json missing (cell22) -> FIXED (import in Cell 1)",
+    "DistilBERT per-fold GPU retention (cell19) -> FIXED (teardown + empty_cache)"
+  ],
+  "documented_non_actionable": [
+    "per-cell 'missing import' findings (re/im/json/np/os/TfidfVectorizer): the notebook is a single kernel session; all imports execute in Cell 1 before any dependent cell",
+    "assert vs raise: integrity-critical checks converted to fail-closed raises; the remainder are development-time invariants, not safety gates"
+  ]
+}

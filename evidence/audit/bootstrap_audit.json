@@ -1,0 +1,21 @@
+{
+  "bootstrap_B": 2000,
+  "bootstrap_B_as_declared": 2000,
+  "bootstrap_threshold": 0.66,
+  "published_test_threshold": 0.66,
+  "threshold_match": true,
+  "bootstrap_unit": "leakage_group",
+  "seed": 42,
+  "ci_method": "percentile_95",
+  "n_test": 199,
+  "f1_ci95": [
+    0.9843,
+    1.0
+  ],
+  "mcc_ci95": [
+    0.9698,
+    1.0
+  ],
+  "status": "PASS",
+  "failure_reason": null
+}

@@ -1,0 +1,14 @@
+{
+  "no_hardcoded_fallbacks": true,
+  "scanner_path": "trac 9.1.ipynb",
+  "scanner_executed": true,
+  "fallback_scan_performed": true,
+  "fallback_hits": [],
+  "derived_metrics": {
+    "fusion_clean_f1": 0.9806451612903225,
+    "fusion_external_roc_auc": 0.6423806690503985,
+    "fusion_external_f1": 0.00849692352768825
+  },
+  "all_metrics_derived_from_tables": true,
+  "status": "PASS"
+}

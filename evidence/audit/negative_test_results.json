@@ -1,0 +1,120 @@
+{
+  "validators_invoked": [
+    "validate_external_labels",
+    "validate_threshold_grid",
+    "validate_grouping_metadata",
+    "validate_threshold_selection_labels",
+    "validate_external_n_provenance",
+    "validate_oof_row_ids",
+    "validate_oof_matrix",
+    "validate_threshold_model_map"
+  ],
+  "n_tests": 10,
+  "n_passed": 10,
+  "all_negative_tests_passed": true,
+  "self_raising_tests_present": false,
+  "tests": [
+    {
+      "test": "1  unknown external label rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "2  empty threshold grid rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "3  missing grouping metadata rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "4  test labels to threshold selection rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "5  external labels to threshold selection rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "6  hardcoded production external N rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "7  duplicate OOF row rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "8  missing OOF row rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "9  missing model OOF predictions rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "10 threshold/model mismatch rejected",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "negative_tests": [
+    {
+      "test": "1  unknown external label rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "2  empty threshold grid rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "3  missing grouping metadata rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "4  test labels to threshold selection rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "5  external labels to threshold selection rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "6  hardcoded production external N rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "7  duplicate OOF row rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "8  missing OOF row rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "9  missing model OOF predictions rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "10 threshold/model mismatch rejected",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}
