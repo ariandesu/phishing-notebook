@@ -1,6 +1,6 @@
 {
   "notebook": "trac 9.1.ipynb",
-  "run_date_utc": "2026-09-17T18:31:40.675151+00:00",
+  "run_date_utc": "2026-09-17T18:56:02.118324+00:00",
   "ocr_pass1_findings": 12,
   "ocr_pass2_findings": 60,
   "execution_host": "DESKTOP-QMR8RM8 (Windows, Python 3.10.11)",
@@ -58,6 +58,9 @@
     "FusionNN + DistilBERT moved onto CUDA with AMP; CPU/GPU tensor mismatch fixed",
     "10 negative tests replaced with genuine fail-closed rejection tests",
     "hardcoded 'status': 'PASS' audit booleans replaced with computed statuses",
+    "hardcoded verification booleans in audit dicts ('formula_verified', 'implementation_verified', 'shortcut_identified', 'hardcoded_literals_absent') replaced with values derived from the computation already performed",
+    "tautological quality-gate conjunct removed; gate O now requires the observed count of real validator rejections",
+    "gate R banned-literal scanner extended to this literal class",
     "adversarial obfuscation seeded one PRNG stream per corpus instead of restarting random.Random(SEED) for every document (removed template-correlated, duplicate perturbation positions); duplicate drifted helper definition removed"
   ],
   "adversarial_note": "DistilBERT adversarial max-rate F1 moved 0.8829787234042553 -> 0.9119170984455959 because the per-document PRNG restart was removed; the earlier figure understated robustness by re-applying identical perturbation positions across template-identical documents. Both runs are preserved in git history."

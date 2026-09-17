@@ -12,6 +12,18 @@
   "n_tests": 10,
   "n_passed": 10,
   "all_negative_tests_passed": true,
+  "validators_that_raised": [
+    "validate_external_labels",
+    "validate_external_n_provenance",
+    "validate_grouping_metadata",
+    "validate_oof_matrix",
+    "validate_oof_row_ids",
+    "validate_threshold_grid",
+    "validate_threshold_model_map",
+    "validate_threshold_selection_labels"
+  ],
+  "n_validator_rejections": 10,
+  "n_self_raising_tests": 0,
   "self_raising_tests_present": false,
   "tests": [
     {
