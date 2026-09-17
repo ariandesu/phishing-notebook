@@ -7,7 +7,7 @@
   "clean_test_perfect_score_warning": true,
   "clean_test_f1": 1.0,
   "artifact_stripped_f1": 0.7931034482758621,
-  "adversarial_f1_max_rate": 0.8829787234042553,
+  "adversarial_f1_max_rate": 0.9119170984455959,
   "status": "PASS",
   "failure_reason": null
 }

@@ -25,7 +25,7 @@
   "evidence": {
     "A. Exact notebook identity": {
       "filename": "trac 9.1.ipynb",
-      "sha256": "c391a6ec2b0b77783f3aeb39b0fd20323ee2b9020ee7914197e7f5eb113d23fd",
+      "sha256": "dd650f64be41e1f110375ebe28823c65f1f177bda99744eb6bc9c2f14e9aef31",
       "code_cells": 31,
       "parse_error": null
     },
@@ -121,12 +121,12 @@
     "P. Source audit": {
       "notebook_file": "trac 9.1.ipynb",
       "actual_hash_matches": true,
-      "expected_hash": "42d6bdb0afa29a85..."
+      "expected_hash": "edbd7dbbc0b84c84..."
     },
     "Q. Clean-kernel execution": {
       "code_cells": 31,
       "kernel_execution_count": 31,
-      "kernel_uptime_seconds": 1041.9,
+      "kernel_uptime_seconds": 1041.1,
       "all_upstream_artifacts_present": true,
       "sequential_full_run": true
     },
@@ -165,5 +165,5 @@
   "n_checks": 21,
   "n_passed": 21,
   "overall": "PASS",
-  "notebook_sha256": "c391a6ec2b0b77783f3aeb39b0fd20323ee2b9020ee7914197e7f5eb113d23fd"
+  "notebook_sha256": "dd650f64be41e1f110375ebe28823c65f1f177bda99744eb6bc9c2f14e9aef31"
 }
