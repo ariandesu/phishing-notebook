@@ -7,5 +7,6 @@
   "external_n_source": "len(ext_raw) at runtime",
   "test_n_source": "len(test_df) at runtime",
   "no_hardcoded_n_in_master": true,
+  "no_hardcoded_n_verification": "master_results.csv re-read from disk vs live frames",
   "status": "PASS"
 }

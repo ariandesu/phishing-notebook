@@ -329,5 +329,50 @@
   "documented_non_actionable": [
     "per-cell 'missing import' findings (re/im/json/np/os/TfidfVectorizer): the notebook is a single kernel session; all imports execute in Cell 1 before any dependent cell",
     "assert vs raise: integrity-critical checks converted to fail-closed raises; the remainder are development-time invariants, not safety gates"
-  ]
+  ],
+  "pass3_assignment_identity_scan": {
+    "method": "order-aware AST scan: for each Compare, compare the fingerprint of the compared Name's most recent preceding assignment RHS, with int()/float()/bool()/str() casts unwrapped on both sides",
+    "detector_false_positive_controls": 4,
+    "detector_false_positives_on_controls": 0,
+    "stage17_hits": 6,
+    "stage18_hits": 0,
+    "sites_repaired": [
+      {
+        "cell": "Cell 11 (code[16])",
+        "before": "best_ep_arg = FUSION_CV_EPOCHS; assert int(best_ep_arg) == int(FUSION_CV_EPOCHS)",
+        "after": "assert int(len(hist)) == int(FUSION_CV_EPOCHS); best_ep = int(len(hist))",
+        "independent_source": "len(hist) \u2014 the trainer's own record of epochs actually run"
+      },
+      {
+        "cell": "Cell 13 (code[22])",
+        "before": "OOF_FUSIONNN_EPOCHS = int(FINAL_EPOCHS); assert OOF_FUSIONNN_EPOCHS == FINAL_EPOCHS",
+        "after": "both derived from the measured development-CV budget; _same_policy compares the measured CV epoch against the declared policy constant",
+        "independent_source": "cv_fixed_epoch (measured) vs FUSION_CV_EPOCHS (declared)"
+      },
+      {
+        "cell": "Cell 18 (code[30])",
+        "before": "if int(OOF_FUSIONNN_EPOCHS) != int(FINAL_EPOCHS): raise ... (unreachable)",
+        "after": "if int(OOF_FUSIONNN_EPOCHS) != int(FUSION_CV_EPOCHS): raise ..."
+      },
+      {
+        "cell": "Cell 20 (code[34])",
+        "before": "BOOTSTRAP_THRESHOLD = float(TEST_OPERATING_THRESHOLD); assert BOOTSTRAP_THRESHOLD == float(TEST_OPERATING_THRESHOLD)",
+        "after": "cross-checked against persisted threshold_oof_audit.json:per_model_audit.FusionNN.threshold",
+        "independent_source": "threshold_oof_audit.json (persisted artifact, 0.66)"
+      },
+      {
+        "cell": "Cell A (code[42])",
+        "before": "no_hardcoded_n_in_master = bool(expected_ext_n == int(len(ext_raw)) and expected_test_n == int(len(test_df)))",
+        "after": "re-read of the written master_results.csv compared against the live frames",
+        "independent_source": "master_results.csv disk round-trip (199 test / 10191 external)"
+      },
+      {
+        "cell": "Cell 26 (code[47])",
+        "before": "Gate F: bool(globals().get('OOF_FUSIONNN_EPOCHS') == globals().get('FINAL_EPOCHS') and ... in globals())",
+        "after": "Gate F reads epoch_policy.json (now a mandatory gate input) and requires FINAL_EPOCHS == OOF_FUSIONNN_EPOCHS == FUSION_CV_EPOCHS",
+        "note": "Gates E and H consumed the repair-site flags; both are now backed by the independent sources above rather than by self-comparisons"
+      }
+    ],
+    "class_level_guard": "Gate R gained an AST assignment-identity pass over the live notebook source, so the pattern is caught mechanically in future runs instead of by inspection. It reports 0 hits on the delivered notebook and 6 on the pre-fix revision."
+  }
 }

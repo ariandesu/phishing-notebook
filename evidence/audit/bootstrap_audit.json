@@ -4,6 +4,8 @@
   "bootstrap_threshold": 0.66,
   "published_test_threshold": 0.66,
   "threshold_match": true,
+  "threshold_cross_checked_against": "threshold_oof_audit.json:per_model_audit.FusionNN.threshold",
+  "persisted_oof_threshold": 0.66,
   "bootstrap_unit": "leakage_group",
   "seed": 42,
   "ci_method": "percentile_95",

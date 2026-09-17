@@ -1,6 +1,6 @@
 {
   "notebook": "trac 9.1.ipynb",
-  "run_date_utc": "2026-09-17T18:57:27.617168+00:00",
+  "run_date_utc": "2026-09-17T19:51:37.399870+00:00",
   "ocr_pass1_findings": 12,
   "ocr_pass2_findings": 60,
   "execution_host": "DESKTOP-QMR8RM8 (Windows, Python 3.10.11)",
@@ -61,13 +61,14 @@
     "hardcoded verification booleans in audit dicts ('formula_verified', 'implementation_verified', 'shortcut_identified', 'hardcoded_literals_absent') replaced with values derived from the computation already performed",
     "tautological quality-gate conjunct removed; gate O now requires the observed count of real validator rejections",
     "gate R banned-literal scanner extended to this literal class",
+    "assignment-identity tautologies removed at every site: a value compared against the very expression it was assigned from (or an alias/cast of it) is always True and proves nothing. Replaced with independent verification: trainer history length, the persisted threshold_oof_audit.json value, and a re-read of the written master_results.csv. Gate F now reads epoch_policy.json instead of comparing two globals that are assigned from each other; Gate R gained a class-level AST scan that catches the whole pattern mechanically",
     "adversarial obfuscation seeded one PRNG stream per corpus instead of restarting random.Random(SEED) for every document (removed template-correlated, duplicate perturbation positions); duplicate drifted helper definition removed"
   ],
   "adversarial_note": "DistilBERT adversarial max-rate F1 moved 0.8829787234042553 -> 0.9119170984455959 because the per-document PRNG restart was removed; the earlier figure understated robustness by re-applying identical perturbation positions across template-identical documents. Both runs are preserved in git history.",
   "notebook_hashes": {
     "note": "Two hashes are recorded on purpose. Gate A identifies the notebook by the sha256 of its INPUT (pre-execution) source, which is the artifact whose behaviour is being certified and which cannot be produced by re-running. The delivered file is the executed OUTPUT, so its sha256 differs; SHA256SUMS.txt covers the delivered file, and the source is byte-identical between input and output (only outputs/execution counts differ).",
-    "input_notebook_sha256": "7515bec3ead6c787b1c89106d48032c4bb561ab0851b02387d1db29ce0f8e61a",
-    "delivered_executed_sha256": "c435b00ec89916bcbef9774774b53a6a91ceb8fe7f9a60a2acabbfa453f1f4c5",
+    "input_notebook_sha256": "aa97c9d1f89aec84034e1cd8afd5ded5a7ad64b05187fa7ea4c2bc5bdfb483ab",
+    "delivered_executed_sha256": "2b0c96fb3af4286e486743ad10d6dff9b6181d4d310d6c6055518f6887ef33cc",
     "sources_identical_input_vs_output": true
   }
 }

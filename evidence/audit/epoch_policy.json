@@ -3,6 +3,8 @@
   "OOF_FUSIONNN_EPOCHS": 15,
   "same_training_epoch_policy": true,
   "derived_from": "development_CV_epoch_budget",
+  "cv_measured_epochs": 15,
+  "declared_policy": 15,
   "untouched_test_used_for_epoch_selection": false,
   "cv_epoch_policy_unique": true,
   "status": "PASS",

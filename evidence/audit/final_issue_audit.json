@@ -58,10 +58,10 @@
     {
       "issue_id": "F",
       "issue_name": "FusionNN OOF epoch policy",
-      "requirement": "OOF_FUSIONNN_EPOCHS == FINAL_EPOCHS",
-      "evidence": "outputs/audit/final_model_selection_audit.json",
-      "evidence_file": "outputs/audit/final_model_selection_audit.json",
-      "verification_method": "OOF_FUSIONNN_EPOCHS == FINAL_EPOCHS",
+      "requirement": "epoch_policy.json: final and OOF epoch policies both equal the development-CV budget",
+      "evidence": "outputs/audit/epoch_policy.json",
+      "evidence_file": "outputs/audit/epoch_policy.json",
+      "verification_method": "epoch_policy.json: final and OOF epoch policies both equal the development-CV budget",
       "verification_result": "PASS",
       "status": "PASS",
       "failure_reason": null
@@ -80,10 +80,10 @@
     {
       "issue_id": "H",
       "issue_name": "hardcoded master-results n",
-      "requirement": "master_results_audit.json dynamic sample sizes derived from len()",
+      "requirement": "master_results_audit.json: live-frame sizes verified against a re-read of the persisted CSV",
       "evidence": "outputs/audit/master_results_audit.json",
       "evidence_file": "outputs/audit/master_results_audit.json",
-      "verification_method": "master_results_audit.json dynamic sample sizes derived from len()",
+      "verification_method": "master_results_audit.json: live-frame sizes verified against a re-read of the persisted CSV",
       "verification_result": "PASS",
       "status": "PASS",
       "failure_reason": null
