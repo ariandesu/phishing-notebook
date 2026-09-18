@@ -1,0 +1,109 @@
+{
+  "title": "Dissecting Structural and Lexical Shortcut Learning in Phishing Detection: Evidence-to-Claim Audit",
+  "dataset_provenance": {
+    "dataset_name": "trac 9.1 benchmark",
+    "total_samples": 10000,
+    "phishing_samples": 5000,
+    "legitimate_samples": 5000,
+    "duplicate_pairs": 0,
+    "assignment_identity_tautologies": 0
+  },
+  "claims": [
+    {
+      "claim_id": "CLAIM-01",
+      "section": "Section III: Model Architectures and Baseline Evaluation",
+      "statement": "FusionNN achieves a 5-fold cross-validation macro F1-score of 0.9952 (ROC-AUC 0.9996, ECE 0.0042) on the baseline dataset.",
+      "evidence_file": "evidence/results/main_cv_summary.csv",
+      "field": "macro_f1, roc_auc, ece",
+      "verified_value": {
+        "macro_f1": 0.9952,
+        "roc_auc": 0.9996,
+        "ece": 0.0042
+      },
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "claim_id": "CLAIM-02",
+      "section": "Section III: Model Architectures and Baseline Evaluation",
+      "statement": "XGBoost achieves a 5-fold cross-validation macro F1-score of 0.9940 (ROC-AUC 0.9992, ECE 0.0061).",
+      "evidence_file": "evidence/results/main_cv_summary.csv",
+      "field": "macro_f1, roc_auc, ece",
+      "verified_value": {
+        "macro_f1": 0.994,
+        "roc_auc": 0.9992,
+        "ece": 0.0061
+      },
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "claim_id": "CLAIM-03",
+      "section": "Section III: Model Architectures and Baseline Evaluation",
+      "statement": "DistilBERT achieves a 5-fold cross-validation macro F1-score of 0.9915 (ROC-AUC 0.9984, ECE 0.0089).",
+      "evidence_file": "evidence/results/main_cv_summary.csv",
+      "field": "macro_f1, roc_auc, ece",
+      "verified_value": {
+        "macro_f1": 0.9915,
+        "roc_auc": 0.9984,
+        "ece": 0.0089
+      },
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "claim_id": "CLAIM-04",
+      "section": "Section IV: Artifact Stripping Ablation",
+      "statement": "Under structural artifact stripping, FusionNN performance drops from 0.9952 to 0.3594 macro F1-score (delta = -0.6358), while ECE degrades to 0.5843.",
+      "evidence_file": "evidence/results/stripping_ablation_summary.csv",
+      "field": "stripped_f1, f1_drop, stripped_ece",
+      "verified_value": {
+        "stripped_f1": 0.3594,
+        "f1_drop": -0.6358,
+        "stripped_ece": 0.5843
+      },
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "claim_id": "CLAIM-05",
+      "section": "Section IV: Artifact Stripping Ablation",
+      "statement": "DistilBERT exhibits superior resilience under artifact stripping, retaining a macro F1-score of 0.7931 (delta = -0.1984).",
+      "evidence_file": "evidence/results/stripping_ablation_summary.csv",
+      "field": "stripped_f1, f1_drop",
+      "verified_value": {
+        "stripped_f1": 0.7931,
+        "f1_drop": -0.1984
+      },
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "claim_id": "CLAIM-06",
+      "section": "Section V: External Transfer and Out-of-Distribution Generalization",
+      "statement": "On out-of-distribution external dataset transfer (N=2,500), FusionNN macro F1 drops to 0.4908 while DistilBERT retains 0.8124 (Wilcoxon p < 0.001).",
+      "evidence_file": "evidence/results/external_results.csv",
+      "field": "external_f1, wilcoxon_p",
+      "verified_value": {
+        "fusion_nn_f1": 0.4908,
+        "distilbert_f1": 0.8124,
+        "p_value": "< 0.001"
+      },
+      "status": "VERIFIED_PASS"
+    },
+    {
+      "claim_id": "CLAIM-07",
+      "section": "Section VI: Adversarial Obfuscation Stress Testing",
+      "statement": "Under multi-tactic adversarial attack, FusionNN F1 deteriorates to 0.1224, whereas DistilBERT preserves 0.6412 F1-score.",
+      "evidence_file": "evidence/results/adversarial_attack_summary.csv",
+      "field": "multi_tactic_f1",
+      "verified_value": {
+        "fusion_nn_f1": 0.1224,
+        "distilbert_f1": 0.6412
+      },
+      "status": "VERIFIED_PASS"
+    }
+  ],
+  "verification_summary": {
+    "total_claims_audited": 7,
+    "claims_passed": 7,
+    "claims_failed": 0,
+    "numerical_tautologies_detected": 0,
+    "audit_verdict": "100% VERIFIED PASS"
+  }
+}

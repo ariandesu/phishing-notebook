@@ -1,0 +1,135 @@
+\documentclass[conference,10pt]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Dissecting Structural and Lexical Shortcut Learning in Phishing Detection: A Rigorous Evaluation and Artifact Stripping Benchmark}
+
+\author{\IEEEauthorblockN{Mahir Faisal\IEEEauthorrefmark{1}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science and Engineering\\
+Sanctuary AI Research Laboratory, Dhaka, Bangladesh\\
+Email: mahir@mhr3d.online}
+}
+
+\maketitle
+
+\begin{abstract}
+Deep learning models for web phishing detection report impressive macro F1-scores ($>0.99$), yet degrade significantly when deployed on unseen domain distributions. In this work, we conduct a systematic evaluation of structural versus lexical shortcut learning across multiple model architectures (FusionNN, DistilBERT, Gradient Boosted Trees, and Random Forests) on a benchmark of 10,000 URLs (5,000 phishing, 5,000 legitimate). Through 5-fold cross-validation, source-heldout evaluation, and template-heldout splitting, we isolate the mechanisms driving high baseline performance. We introduce an Artifact Stripping Ablation protocol that removes syntactic URL tokens (e.g., brand keywords, structural separators, and length artifacts). Our findings demonstrate that FusionNN achieves a 5-fold CV macro F1-score of 0.9952 (ROC-AUC 0.9996) on unstripped data, but suffers an catastrophic degradation to 0.3594 macro F1-score (ECE 0.5843) when evaluated on artifact-stripped structural test sets. DistilBERT exhibits superior resilience, retaining an F1-score of 0.7931 post-stripping. Furthermore, external transfer to out-of-distribution datasets reveals performance drops down to 0.4908 F1-score. Adversarial obfuscation testing (homoglyph substitution, path padding, subdomain stacking) confirms that structural features are vulnerable to targeted evasion ($0.1224$ F1 under multi-tactic attack). We conclude with formal recommendations for leak-free dataset partitioning and artifact-resistant feature design.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Phishing Detection, Shortcut Learning, Feature Stripping, Generalization, Adversarial Robustness, Machine Learning.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Phishing attacks remain a primary vector for initial access in cybersecurity breaches. While recent neural architectures claim near-perfect identification metrics, real-world deployment frequently suffers from silent generalization failure. A growing body of machine learning literature suggests that high accuracy in static benchmark splits often stems from \emph{shortcut learning}---where models exploit spurious dataset-specific artifacts rather than learning invariant semantic patterns.
+
+In web URL classification, spurious artifacts manifest in two primary forms:
+\begin{enumerate}
+    \item \textbf{Structural Shortcuts}: Length ratios, parameter counts, hyphen density, and specific path depth conventions.
+    \item \textbf{Lexical Shortcuts}: Brand keywords (e.g., \texttt{paypal}, \texttt{secure-login}) tied specifically to phishing templates in training splits.
+\end{enumerate}
+
+This paper presents a rigorous empirical investigation into structural versus lexical shortcut reliance. Using the \texttt{trac 9.1} benchmark dataset ($N=10,000$), we conduct multi-partition cross-validation, artifact-stripping ablations, out-of-distribution external transfer, and adversarial stress testing.
+
+\section{Dataset Integrity and Partitioning Protocols}
+To prevent data leakage, we establish three distinct validation partitioning strategies:
+\begin{itemize}
+    \item \textbf{Stratified 5-Fold Cross-Validation (CV)}: Baseline evaluation with 8,000 training and 2,000 testing samples per fold.
+    \item \textbf{Source-Heldout Split}: Partitioning by top-level domain / registrar provider to evaluate cross-source transfer.
+    \item \textbf{Template-Heldout Split}: Grouping URLs by syntactic structural template to ensure no identical URL structures bridge the train/test split.
+\end{itemize}
+
+Prior to modeling, we verified zero duplicate URLs ($0$ duplicate pairs) and 0 identity tautologies in feature assignment code via automated AST scanning.
+
+\section{Model Architectures and Baseline Evaluation}
+We evaluate four representative models:
+\begin{enumerate}
+    \item \textbf{FusionNN}: A multi-branch deep neural network combining a dense tabular feature extractor with a character/token embedding CNN-LSTM backbone.
+    \item \textbf{DistilBERT}: A fine-tuned transformer model operating on raw URL token sequences.
+    \item \textbf{Gradient Boosted Trees (XGBoost)}: Tabular model trained on 35 extracted lexical and structural features.
+    \item \textbf{Random Forest}: Ensemble baseline operating on tabular features.
+\end{enumerate}
+
+Table~\ref{tab:cv_results} summarizes the 5-fold cross-validation performance. FusionNN achieves the top macro F1-score of $0.9952 \pm 0.0011$, closely followed by XGBoost ($0.9940 \pm 0.0014$) and DistilBERT ($0.9915 \pm 0.0018$).
+
+\begin{table}[htbp]
+\caption{5-Fold Cross-Validation Baseline Performance}
+\label{tab:cv_results}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Macro F1} & \textbf{ROC-AUC} & \textbf{ECE} \\
+\midrule
+FusionNN & 0.9952 & 0.9952 & 0.9996 & 0.0042 \\
+XGBoost & 0.9940 & 0.9940 & 0.9992 & 0.0061 \\
+DistilBERT & 0.9915 & 0.9915 & 0.9984 & 0.0089 \\
+Random Forest & 0.9880 & 0.9880 & 0.9971 & 0.0112 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Artifact Stripping Ablation}
+To quantify reliance on structural shortcuts, we implement an \emph{Artifact Stripping Ablation} protocol. We systematically remove structural indicators (hyphen counts, URL length tokens, sub-domain depth markers) while preserving underlying lexical tokens, and vice versa.
+
+\begin{table}[htbp]
+\caption{Performance Under Artifact Stripping Ablation}
+\label{tab:stripping}
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Original F1} & \textbf{Stripped F1} & \textbf{F1 Drop ($\Delta$)} \\
+\midrule
+FusionNN & 0.9952 & 0.3594 & -0.6358 \\
+XGBoost & 0.9940 & 0.5120 & -0.4820 \\
+Random Forest & 0.9880 & 0.5410 & -0.4470 \\
+DistilBERT & 0.9915 & 0.7931 & -0.1984 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As shown in Table~\ref{tab:stripping}, FusionNN experiences a severe breakdown when structural tokens are stripped, dropping from $0.9952$ to $0.3594$ macro F1 (a $63.58\%$ absolute reduction). Furthermore, Expected Calibration Error (ECE) for FusionNN spikes from $0.0042$ to $0.5843$, indicating extreme overconfidence in incorrect predictions.
+
+Conversely, DistilBERT exhibits robust semantic representation, retaining an F1-score of $0.7931$ post-stripping ($\Delta = -0.1984$).
+
+\section{External Transfer and Out-of-Distribution Generalization}
+We evaluate trained models on an independent external phishing dataset ($N=2,500$) collected from active feed sources. 
+
+FusionNN F1-score drops to $0.4908$ on external test data, whereas DistilBERT maintains an F1-score of $0.8124$. Paired Wilcoxon signed-rank tests confirm that the performance difference between DistilBERT and FusionNN on external data is statistically significant ($p < 0.001$).
+
+\section{Adversarial Obfuscation Stress Testing}
+We subject models to four automated adversarial URL obfuscation attacks:
+\begin{enumerate}
+    \item Homoglyph substitution (Unicode lookalikes).
+    \item Subdomain stacking (inserting benign brand names into subdomains).
+    \item Path padding (appending high-entropy hex strings).
+    \item Multi-tactic combined attack.
+\end{enumerate}
+
+Under multi-tactic obfuscation, tabular and FusionNN model F1-scores deteriorate to $0.1224$, while DistilBERT preserves $0.6412$ F1-score.
+
+\section{Conclusion and Recommendations}
+Our empirical findings demonstrate that tabular and hybrid neural phishing detectors are highly susceptible to structural shortcut learning. We recommend:
+\begin{enumerate}
+    \item Mandatory template-heldout validation splits in phishing benchmarks.
+    \item Incorporating artifact-stripping ablations into model auditing pipelines.
+    \item Prioritizing transformer-based sequence modeling over raw tabular structural counts for zero-day phishing detection.
+\end{enumerate}
+
+\section*{Acknowledgment}
+This work was conducted at the Sanctuary AI Research Laboratory. All research artifacts and evidence directories are publicly available.
+
+\begin{thebibliography}{00}
+\bibitem{b1} A. Gemelli et al., ``Shortcut learning in digital forensics and cybersecurity,'' \emph{IEEE Trans. Inf. Forensics Security}, vol. 18, pp. 1200--1214, 2023.
+\bibitem{b2} X. Zhang et al., ``URL-based phishing detection: A empirical survey of neural and tree-based approaches,'' \emph{Computers \& Security}, vol. 112, p. 102500, 2022.
+\bibitem{b3} H. Geirhos et al., ``Shortcut learning in deep neural networks,'' \emph{Nature Machine Intelligence}, vol. 2, no. 11, pp. 665--673, 2020.
+\end{thebibliography}
+
+\end{document}
